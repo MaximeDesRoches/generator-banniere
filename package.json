@@ -4,7 +4,7 @@
   "description": "La Grange - Générateur Bannière",
   "license": "MIT",
   "main": "app/index.js",
-  "repository": "lagrangemtl/generator-banner",
+  "repository": "MaximeDesRoches/generator-banniere",
   "author": {
     "name": "Maxime Des Roches",
     "email": "",

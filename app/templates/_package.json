@@ -26,7 +26,9 @@
     "gulp-inject": "3.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "0.5.4",
-    "gulp.spritesmith": "~3.5.4"
+    "gulp.spritesmith": "~3.5.4",
+    "gulp-imagemin": "^3.0.1",
+    "imagemin-pngquant": "^5.0.0"
   },
   "keywords": []
 }

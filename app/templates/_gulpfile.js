@@ -7,7 +7,10 @@ var fs = require("fs");
 var bannersFolder = 'html';
 var formatRegex = /^(en|fr)?_?([\d]+x[\d]+)_?(.*)/i;
 var zip = require('gulp-zip');
+var imagemin = require('gulp-imagemin');
+var pngquant = require('imagemin-pngquant');
 var spritesmith = require('gulp.spritesmith');
+var gutil = require('gulp-util');
 
 function generateSpritesheets(file) {
 	var dest = file.path.replace(/[\/\\][\w_\-\.]+\.\w+$/, '');
@@ -71,10 +74,11 @@ function bundleZip(){
 		}).forEach(function(cnf){
 			// console.log(cnf.full);
 
-			console.log("Zipping:", dirname+'/'+cnf.full);
-
 			var base = bannersFolder + '/' + dirname + '/' + cnf.full;
 			var stream = gulp.src([base + '/**', '!'+base+'/spritesheet_src/**', '!'+base+'/spritesheet_src/', '!'+base+'/**/*.scss'])
+							.pipe(imagemin([pngquant()]).on('end', function(){
+								gutil.log(gutil.colors.yellow("Zipping:"), dirname+'/'+cnf.full);
+							}))
 							.pipe(zip(cnf.full+'.zip'))
 							.pipe(gulp.dest(bundleFolder+'/'+dirname));
 		});

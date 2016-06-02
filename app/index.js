@@ -23,11 +23,11 @@ var LagrangeGenerator = yeoman.generators.Base.extend({
 
 		this.on('end', function () {
 			if (!this.options['skip-install']) {
-				this.installDependencies({
-					callback: function () {
-						this.spawnCommand('git', ['archive','--remote=https://bitbucket.org/lg2fabrique/html5_banner_template','HEAD:dist','lib.min.js','|','tar','-x']);
-					}.bind(this)
-				});
+				this.spawnCommand('git', ['archive','--remote=https://bitbucket.org/lg2fabrique/html5_banner_template','HEAD:dist','lib.min.js','|','tar','-x']);
+				// this.installDependencies({
+				// 	callback: function () {
+				// 	}.bind(this)
+				// });
 			}
 		});
 	},
@@ -56,7 +56,7 @@ var LagrangeGenerator = yeoman.generators.Base.extend({
 			{
 				name: 'projectName',
 				type: 'input',
-				message: 'Nom du client/projet',
+				message: 'Nom du dossier',
 				default : this.appname,
 			}
 		];

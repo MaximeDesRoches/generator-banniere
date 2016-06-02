@@ -1,6 +1,6 @@
 {
   "name": "generator-banniere",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "La Grange - Générateur Bannière",
   "license": "MIT",
   "main": "app/index.js",

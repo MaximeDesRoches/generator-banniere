@@ -1,0 +1,32 @@
+{
+  "name": "desjardin",
+  "title": "lg2-desjardins-assurance-generales",
+  "version": "0.0.1",
+  "homepage": "",
+  "author": {
+    "name": "La Grange Inc.",
+    "email": "info@la-grange.ca"
+  },
+  "devDependencies": {
+    "colors": "latest",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "latest",
+    "gulp-sass": "latest",
+    "gulp-uglify": "^1.4.1",
+    "gulp-util": "latest",
+    "utils-merge": "latest",
+    "vinyl-buffer": "latest",
+    "vinyl-source-stream": "latest",
+    "watchify": "^3.4.0",
+    "gulp-zip": "latest",
+    "map-stream": "latest",
+    "merge-stream": "^1.0.0",
+    "gulp-watch": "^4.3.5",
+    "gulp-concat": "2.6.0",
+    "gulp-inject": "3.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "0.5.4",
+    "gulp.spritesmith": "~3.5.4"
+  },
+  "keywords": []
+}

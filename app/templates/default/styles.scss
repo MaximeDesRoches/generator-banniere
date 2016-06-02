@@ -1,0 +1,46 @@
+@import "spritesheet.scss";
+
+*{
+	padding:0px;
+	margin:0px;
+}
+
+#ad, #stage{
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+#ad{
+	visibility:hidden;
+}
+#ad a{
+	color:#009758;
+}
+
+.btn:hover {
+    @extend .btnover;
+}
+
+#stage{
+	position: relative;
+	width: 100%; height: 100%;
+	background-color: #ffffff;
+	cursor: pointer;
+	overflow: hidden;
+}
+
+.thin { letter-spacing: -0.2em; }
+
+#stage{
+	background:#fff;
+}
+
+#cta {
+	width:300px;
+	height:250px;
+	cursor:pointer;
+	position: absolute;
+	top:0;
+	left:0;
+}

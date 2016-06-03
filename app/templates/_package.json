@@ -8,6 +8,7 @@
     "email": "info@la-grange.ca"
   },
   "devDependencies": {
+	"yargs": "latest",
     "colors": "latest",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "latest",
@@ -28,7 +29,8 @@
     "gulp-replace": "0.5.4",
     "gulp.spritesmith": "~3.5.4",
     "gulp-imagemin": "^3.0.1",
-    "imagemin-pngquant": "^5.0.0"
+    "imagemin-pngquant": "^5.0.0",
+  	"html5_banner": "git+https://MaximeDesRoches@bitbucket.org/lg2fabrique/html5_banner.git"
   },
   "keywords": []
 }

@@ -11,6 +11,7 @@ var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
 var spritesmith = require('gulp.spritesmith');
 var gutil = require('gulp-util');
+var argv = require('yargs').argv;
 
 function generateSpritesheets(file) {
 	var dest = file.path.replace(/[\/\\][\w_\-\.]+\.\w+$/, '');
@@ -88,6 +89,13 @@ function bundleZip(){
 }
 
 //************** TASKS
+
+gulp.task('libcopy', function(){
+	var folder = argv.folder || "default";
+	gulp.src('./node_modules/html5_banner/dist/lib.min.js')
+		.pipe(gulp.dest('./default/'))
+		.pipe(gulp.dest('./html/'+folder));
+});
 
 gulp.task('scss', compileScss);
 

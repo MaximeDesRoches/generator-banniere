@@ -23,11 +23,11 @@ var LagrangeGenerator = yeoman.generators.Base.extend({
 
 		this.on('end', function () {
 			if (!this.options['skip-install']) {
-				this.spawnCommand('git', ['archive','--remote=https://bitbucket.org/lg2fabrique/html5_banner_template','HEAD:dist','lib.min.js','|','tar','-x']);
-				// this.installDependencies({
-				// 	callback: function () {
-				// 	}.bind(this)
-				// });
+				this.installDependencies({
+					callback: function () {
+						this.spawnCommand('gulp', ['libcopy', '--folder', this.props.projectName + '/en_' + this.props.width + 'x' + this.props.height + '_' + this.props.nomBanniere]);
+					}.bind(this)
+				});
 			}
 		});
 	},
@@ -58,6 +58,24 @@ var LagrangeGenerator = yeoman.generators.Base.extend({
 				type: 'input',
 				message: 'Nom du dossier',
 				default : this.appname,
+			},
+			{
+				name: 'width',
+				type: 'input',
+				message: 'Width',
+				default : 300,
+			},
+			{
+				name: 'height',
+				type: 'input',
+				message: 'Height',
+				default : 250,
+			},
+			{
+				name: 'nomBanniere',
+				type: 'input',
+				message: 'Nom de la bannière',
+				default : 'client_concept',
 			}
 		];
 
@@ -74,8 +92,21 @@ var LagrangeGenerator = yeoman.generators.Base.extend({
 		this.template('_package.json', 'package.json');
 		this.template('_gulpfile.js', 'gulpfile.js');
 		this.template('_.gitignore', '.gitignore');
-		this.directory('default');
 		this.mkdir('html');
+
+		this.mkdir('html/' + this.props.projectName);
+		this.mkdir('html/' + this.props.projectName + '/en_' + this.props.width + 'x' + this.props.height + '_' + this.props.nomBanniere );
+
+		function copyDefault(ctx, basepath) {
+			ctx.template('default/index.html', basepath + '/index.html');
+			ctx.template('default/script.js', basepath + '/script.js');
+			ctx.template('default/styles.scss', basepath + '/styles.scss');
+			ctx.mkdir(basepath + '/spritesheet_src');
+		}
+
+		// this.directory('default', );
+		copyDefault(this, 'default');
+		copyDefault(this, 'html/' + this.props.projectName + '/en_' + this.props.width + 'x' + this.props.height + '_' + this.props.nomBanniere);
 	},
 });
 

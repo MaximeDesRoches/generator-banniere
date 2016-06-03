@@ -101,7 +101,7 @@ var LagrangeGenerator = yeoman.generators.Base.extend({
 			ctx.template('default/index.html', basepath + '/index.html');
 			ctx.template('default/script.js', basepath + '/script.js');
 			ctx.template('default/styles.scss', basepath + '/styles.scss');
-			ctx.template('default/stylesheet.scss', basepath + '/stylesheet.scss');
+			ctx.template('default/spritesheet.scss', basepath + '/spritesheet.scss');
 			ctx.mkdir(basepath + '/spritesheet_src');
 		}
 

@@ -24,11 +24,9 @@ var LagrangeGenerator = yeoman.generators.Base.extend({
 
 		this.on('end', function () {
 			if (!this.options['skip-install']) {
-				this.installDependencies({
-					callback: function () {
-						this.spawnCommandSync('gulp', ['libcopy', '--folder', this.props.projectName + '/en_' + this.props.width + 'x' + this.props.height + '_' + this.props.nomBanniere]);
-					}.bind(this)
-				});
+				this.npmInstall(null, null, function () {
+					this.spawnCommand('gulp', ['libcopy', '--folder', this.props.projectName + '/en_' + this.props.width + 'x' + this.props.height + '_' + this.props.nomBanniere]);
+				}.bind(this));
 			}
 		});
 	},

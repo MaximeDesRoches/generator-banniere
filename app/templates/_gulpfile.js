@@ -5,7 +5,7 @@ var bundleFolder = 'bundled';
 var packageFolder = '';
 var fs = require("fs");
 var bannersFolder = 'html';
-var formatRegex = /^(en|fr)?_?([\d]+x[\d]+)_?(.*)/i;
+var formatRegex = /^(.*?)_(.*?)_(.*?)_([0-9]+)x([0-9]+)/i;
 var zip = require('gulp-zip');
 var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
@@ -59,28 +59,16 @@ function bundleZip(){
 	var bannersGroup = fs.readdirSync(bannersFolder).filter(function(f){
 		return f != ".DS_Store";
 	}).forEach(function(dirname){
-		var banners = fs.readdirSync(bannersFolder + '/' + dirname).map(function(fname) {
-			var m = fname.match(formatRegex);
-			if(m) {
-				return {
-					lng: m[1],
-					format: m[2],
-					name: m[3],
-					full: m[0],
-				}
-			}
-			return false;
-		}).filter(function(f){
-			return f;
+		var banners = fs.readdirSync(bannersFolder + '/' + dirname)
+		.filter(function(f){
+			return formatRegex.exec(f);
 		}).forEach(function(cnf){
-			// console.log(cnf.full);
-
-			var base = bannersFolder + '/' + dirname + '/' + cnf.full;
+			var base = bannersFolder + '/' + dirname + '/' + cnf;
 			var stream = gulp.src([base + '/**', '!'+base+'/spritesheet_src/**', '!'+base+'/spritesheet_src/', '!'+base+'/**/*.scss'])
 							.pipe(imagemin([pngquant()]).on('end', function(){
-								gutil.log(gutil.colors.yellow("Zipping:"), dirname+'/'+cnf.full);
+								gutil.log(gutil.colors.yellow("Zipping:"), dirname+'/'+cnf);
 							}))
-							.pipe(zip(cnf.full+'.zip'))
+							.pipe(zip(cnf+'.zip'))
 							.pipe(gulp.dest(bundleFolder+'/'+dirname));
 		});
 	});

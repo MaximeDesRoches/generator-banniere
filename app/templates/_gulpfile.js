@@ -12,6 +12,7 @@ var pngquant = require('imagemin-pngquant');
 var spritesmith = require('gulp.spritesmith');
 var gutil = require('gulp-util');
 var argv = require('yargs').argv;
+var livereload = require('gulp-livereload');
 
 function generateSpritesheets(file) {
 	var dest = file.path.replace(/[\/\\][\w_\-\.]+\.\w+$/, '');
@@ -26,7 +27,7 @@ function generateSpritesheets(file) {
     spriteData.img.pipe(gulp.dest(dest + '/../'));
     spriteData.css.pipe(gulp.dest(dest + '/../').on('end', function(){
 		console.log('Spritesheet generated');
-	}));
+	})).pipe(livereload());
 };
 
 
@@ -43,7 +44,8 @@ function compileScss(file){
 		.pipe(autoprefixer())
 		.pipe(gulp.dest(dest).on('end',function(){
 			console.log('Sass compiled.');
-		}));
+		}))
+		.pipe(livereload());
 }
 
 
@@ -88,6 +90,7 @@ gulp.task('libcopy', function(){
 gulp.task('scss', compileScss);
 
 gulp.task('watch', function () {
+	livereload.listen();
 
 	gulp.watch('**/**/styles.scss').on('change', compileScss);
 	gulp.watch('**/**/spritesheet_src/*.*').on('change', generateSpritesheets);

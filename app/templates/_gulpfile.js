@@ -5,7 +5,7 @@ var bundleFolder = 'bundled';
 var packageFolder = '';
 var fs = require("fs");
 var bannersFolder = 'html';
-var formatRegex = /^(.*?)_(.*?)_(.*?)_([0-9]+)x([0-9]+)/i;
+var formatRegex = /^(.*?)_(.*?)_([0-9]+)x([0-9]+)_(.*?)_?/i;
 var zip = require('gulp-zip');
 var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
@@ -14,21 +14,21 @@ var gutil = require('gulp-util');
 var argv = require('yargs').argv;
 var livereload = require('gulp-livereload');
 
-function generateSpritesheets(file) {
-	var dest = file.path.replace(/[\/\\][\w_\-\.]+\.\w+$/, '');
-	//console.log(file.path);
-	//console.log(dest);
-    var spriteData = gulp.src(dest + '/*')
-        .pipe(spritesmith({
-            imgName: 'spritesheet.png',
-            cssName: 'sprites.scss'
-        }));
+// function generateSpritesheets(file) {
+// 	var dest = file.path.replace(/[\/\\][\w_\-\.]+\.\w+$/, '');
+// 	//console.log(file.path);
+// 	//console.log(dest);
+//     var spriteData = gulp.src(dest + '/*')
+//         .pipe(spritesmith({
+//             imgName: 'spritesheet.png',
+//             cssName: 'sprites.scss'
+//         }));
 
-    spriteData.img.pipe(gulp.dest(dest + '/../'));
-    spriteData.css.pipe(gulp.dest(dest + '/../').on('end', function(){
-		console.log('Spritesheet generated');
-	})).pipe(livereload());
-};
+//     spriteData.img.pipe(gulp.dest(dest + '/../'));
+//     spriteData.css.pipe(gulp.dest(dest + '/../').on('end', function(){
+// 		console.log('Spritesheet generated');
+// 	})).pipe(livereload());
+// };
 
 
 
@@ -93,7 +93,7 @@ gulp.task('watch', function () {
 	livereload.listen();
 
 	gulp.watch('**/**/styles.scss').on('change', compileScss);
-	gulp.watch('**/**/spritesheet_src/*.*').on('change', generateSpritesheets);
+	// gulp.watch('**/**/spritesheet_src/*.*').on('change', generateSpritesheets);
 
 });
 

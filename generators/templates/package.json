@@ -1,35 +1,32 @@
 {
-  "name": "banniere",
-  "title": "Bannière",
-  "version": "0.0.1",
-  "homepage": "",
-  "author": {
-      "name": "La Grange Inc.",
-      "email": "info@la-grange.ca"
-  },
-  "scripts": {
-      "watch": "node scripts/watch.js"
-  },
-  "dependencies": {
-      "html5_banner": "git+https://MaximeDesRoches@bitbucket.org/lg2fabrique/html5_banner.git"
-  },
-  "devDependencies": {
-      "@babel/core": "^7.6.2",
-      "autoprefixer": "^9.6.1",
-      "cssnano": "^4.1.10",
-      "del": "^5.1.0",
-      "gulp": "^4.0.2",
-      "gulp-babel": "^8.0.0",
-      "gulp-copy": "^4.0.1",
-      "gulp-flatten": "^0.4.0",
-      "gulp-imagemin": "^6.1.0",
-      "gulp-livereload": "^4.0.2",
-      "gulp-postcss": "^8.0.0",
-      "gulp-sass": "^4.0.2",
-      "gulp-uglify": "^3.0.2",
-      "gulp-zip": "^5.0.0",
-      "merge-stream": "^2.0.0",
-      "node-sass": "^4.12.0"
-  },
-  "keywords": []
+	"name": "<%= projectName %>",
+	"title": "Bannière",
+	"version": "0.0.1",
+	"homepage": "",
+	"author": {
+		"name": "La Grange Inc.",
+		"email": "info@la-grange.ca"
+	},
+	"dependencies": {
+		"html5_banner": "git+https://MaximeDesRoches@bitbucket.org/lg2fabrique/html5_banner.git"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.6.2",
+		"autoprefixer": "^9.6.1",
+		"cssnano": "^4.1.10",
+		"del": "^5.1.0",
+		"gulp": "^4.0.2",
+		"gulp-babel": "^8.0.0",
+		"gulp-copy": "^4.0.1",
+		"gulp-flatten": "^0.4.0",
+		"gulp-imagemin": "^6.1.0",
+		"gulp-livereload": "^4.0.2",
+		"gulp-postcss": "^8.0.0",
+		"gulp-sass": "^4.0.2",
+		"gulp-uglify": "^3.0.2",
+		"gulp-zip": "^5.0.0",
+		"merge-stream": "^2.0.0",
+		"node-sass": "^4.12.0"
+	},
+	"keywords": []
 }

@@ -1,3 +1,5 @@
+const pkg = require('./package.json');
+const gutil = require('gulp-util');
 const { series, parallel, src, dest, watch } = require('gulp');
 const glob = require('glob');
 const merge = require('merge-stream');
@@ -92,7 +94,21 @@ function reload() {
 	return Promise.resolve();
 }
 
-exports.watch = () => {
+function string_src(filename, string) {
+	var src = require('stream').Readable({ objectMode: true });
+	src._read = function () {
+		this.push(new gutil.File({
+			cwd: "",
+			base: "",
+			path: filename,
+			contents: new Buffer.from(string)
+		}));
+		this.push(null);
+	}
+	return src;
+}
+
+exports.watch = function() {
 	livereload.listen();
 	watch('source/**/*.@(scss|js|png|jpg|gif|svg|html)', { ignoreInitial: false }, 
 		series(
@@ -102,6 +118,18 @@ exports.watch = () => {
 			parallel(images, copyhtml),
 		)
 	);
+}
+
+exports.enclos = () => {
+	const destinationFolders = glob.sync('minified/*/*');
+	
+	const content = destinationFolders.reduce((c, folder) => {
+		c += folder.replace('minified/', 'http://clients.enclos.ca/public_html/richmedia/' + pkg.name + '/') + '\n';
+		return c;
+	}, '');
+
+	return string_src('liens_enclos.txt', content)
+				.pipe(dest('.'))
 }
 
 exports.bundle = bundle;

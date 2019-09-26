@@ -7,31 +7,21 @@
   "repository": "MaximeDesRoches/generator-banniere",
   "author": {
     "name": "Maxime Des Roches",
-    "email": "",
     "url": "https://github.com/MaximeDesRoches"
   },
-  "engines": {
-    "node": ">=0.10.0"
-  },
-  "scripts": {
-    "test": "mocha"
-  },
   "files": [
-    "app"
-  ],
-  "keywords": [
-    "yeoman-generator"
+    "generators"
   ],
   "dependencies": {
-    "yeoman-generator": "~0.16.0",
-    "chalk": "~0.4.0"
-  },
-  "devDependencies": {
-    "gulp": "latest",
-    "gulp-livereload": "^3.8.1",
-    "mocha": "*"
+    "chalk": "~0.4.0",
+    "lodash": "^4.17.14",
+    "mocha": "^6.1.4",
+    "yeoman-generator": "^4.0.1"
   },
   "peerDependencies": {
-    "yo": "latest"
+    "yo": ">=1.0.0"
+  },
+  "devDependencies": {
+    "mkdirp": "^0.5.1"
   }
 }

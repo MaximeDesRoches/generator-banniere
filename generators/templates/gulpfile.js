@@ -120,6 +120,15 @@ exports.watch = function() {
 	);
 }
 
+exports.build = function() {
+	return series(
+		clean,
+		copylibs,
+		series(css, javascript, reload),
+		parallel(images, copyhtml),
+	);
+}
+
 exports.enclos = () => {
 	const destinationFolders = glob.sync('minified/*/*');
 	

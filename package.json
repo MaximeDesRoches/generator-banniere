@@ -22,6 +22,7 @@
     "yo": ">=1.0.0"
   },
   "devDependencies": {
+    "glob": "^7.1.4",
     "mkdirp": "^0.5.1"
   }
 }

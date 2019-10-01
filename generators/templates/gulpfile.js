@@ -124,7 +124,7 @@ exports.enclos = () => {
 	const destinationFolders = glob.sync('minified/*/*');
 	
 	const content = destinationFolders.reduce((c, folder) => {
-		c += folder.replace('minified/', 'http://clients.enclos.ca/public_html/richmedia/' + pkg.name + '/') + '\n';
+		c += folder.replace('minified/', 'http://clients.enclos.ca/richmedia/' + pkg.name + '/') + '\n';
 		return c;
 	}, '');
 

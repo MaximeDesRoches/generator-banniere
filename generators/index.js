@@ -59,7 +59,6 @@ module.exports = class extends Generator {
 
 		mkdirp.sync('source');
 		mkdirp.sync('minified');
-		mkdirp.sync('bundle');
 
 		this.installDependencies();
 	}

@@ -10,6 +10,7 @@ const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const imagemin = require('gulp-imagemin');
+const rename = require('gulp-rename');
 const del = require('del');
 const flatten = require('gulp-flatten')
 const zip = require('gulp-zip');
@@ -18,23 +19,26 @@ const livereload = require('gulp-livereload');
 sass.compiler = require('node-sass');
 
 const SASS_PATH = 'source/**/*.scss';
-const JS_PATH = 'source/**/*.js';
-const HTML_PATH = 'source/**/index.html';
+const JS_PATH = 'source/**/script.js';
 const IMG_PATH = 'source/**/*.@(png|jpg|gif|svg)';
+const COPY_PATH = ['source/**/*.@(html|css|png|jpg|gif|svg)', 'source/**/*.min.js'];
 
 function clean() {
-	return del('minified/*');
+	return del('minified');
 }
 
 function javascript() {
 	return src(JS_PATH)
 		.pipe(babel())
 		.pipe(uglify())
-		.pipe(dest('minified/'));
+		.pipe(rename((path) => {
+			path.extname = '.min.js';
+		}))
+		.pipe(dest('source/'));
 }
 
 function copylibs() {
-	const destinationFolders = glob.sync('minified/**/js/');
+	const destinationFolders = glob.sync('source/**/js/');
 
 	let stream = src('node_modules/html5_banner/dist/lib.min.js');
 
@@ -53,7 +57,9 @@ function css(cb) {
 	return src(SASS_PATH)
 		.pipe(sass().on('error', sass.logError))
 		.pipe(postcss(plugins))
-		.pipe(dest('minified/'))
+		.pipe(rename((path) => {
+			path.extname = '.min.css';
+		}))
 		.pipe(dest('source/'));
 }
 
@@ -69,7 +75,7 @@ function images() {
 }
 
 function copyhtml() {
-	return src(HTML_PATH)
+	return src(COPY_PATH)
 		.pipe(dest('minified/'));
 }
 
@@ -110,18 +116,15 @@ function string_src(filename, string) {
 
 exports.watch = function() {
 	livereload.listen();
-	watch('source/**/*.@(scss|js|png|jpg|gif|svg|html)', { ignoreInitial: false }, 
+	watch(['source/**/*.@(scss|png|jpg|gif|svg|html)', 'source/**/script.js'], { ignoreInitial: false }, 
 		series(
-			clean,
 			copylibs,
 			series(css, javascript, reload),
-			parallel(images, copyhtml),
 		)
 	);
 }
 
 exports.build = series(
-	clean,
 	copylibs,
 	series(css, javascript, reload),
 	parallel(images, copyhtml),
@@ -139,4 +142,4 @@ exports.enclos = () => {
 				.pipe(dest('.'))
 }
 
-exports.bundle = bundle;
+exports.bundle = series(exports.build, bundle, clean);

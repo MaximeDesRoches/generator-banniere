@@ -126,9 +126,13 @@ exports.watch = function() {
 
 exports.build = series(
 	copylibs,
-	series(css, javascript, reload),
-	parallel(images, copyhtml),
+	series(css, javascript),
+	copyhtml,
 );
+
+exports.images = () => {
+	return images();
+}
 
 exports.enclos = () => {
 	const destinationFolders = glob.sync('minified/*/*');
